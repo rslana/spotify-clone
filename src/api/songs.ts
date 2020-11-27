@@ -4,6 +4,7 @@ export type Song = {
   name: string
   author: string
   cover: string
+  liked: boolean
 } | undefined
 
 const songs:Song[] = [
@@ -12,6 +13,7 @@ const songs:Song[] = [
     name: "Roxanne",
     author: "The Police",
     cover: "/images/covers/albums/the-police/outlandos-d-amour.jpg",
+    liked: true
   }
 ]
 

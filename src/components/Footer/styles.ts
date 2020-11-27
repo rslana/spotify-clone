@@ -7,21 +7,47 @@ export const Container = styled.div`
   width: 100%;
   background: var(--gray-color);
   color: #fff;
-  padding: 0 24px;
+  padding: 0 16px;
   grid-template-columns: 28% 44% 28%;  
 `;
 
-export const SongInfo = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+`;
+
+export const SongInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 
   a:hover {
     text-decoration: underline;
     color: #fff;
   }
 `;
+
+type AlbumProps = {
+  cover: string
+  show?: boolean
+}
+
+export const Album = styled.div.attrs((props:AlbumProps) => ({
+  show: props.show
+}))<AlbumProps>`
+  width: 56px;
+  height: 56px;
+  transition: 300ms;
+  background-image: ${props => `url(${props.cover})`};
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 16px;
+  margin-left: ${props => props.show ? "initial" : "-72px"};
+`
 
 export const SongName = styled(Link)`
   display: flex;
