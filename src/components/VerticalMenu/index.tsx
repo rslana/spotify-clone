@@ -1,5 +1,14 @@
 import React from "react";
-import { Container, Logo, MenuLink, MenuLinks } from "./styles";
+import {
+  Container,
+  IconWrapper,
+  Logo,
+  MenuLink,
+  MenuLinks,
+  PlaylistLink,
+  Divider,
+  Title,
+} from "./styles";
 import * as SvgIcons from "../Icons";
 import { Link, useHistory } from "react-router-dom";
 
@@ -29,6 +38,30 @@ export default function VerticalMenu() {
             <SvgIcons.Library active={isActive("/playlist")} /> Your Library
           </Link>
         </MenuLink>
+      </MenuLinks>
+      <MenuLinks>
+        <Title>Playlists</Title>
+        <PlaylistLink main={true}>
+          <Link to="/create-playlist">
+            <IconWrapper background={"#fff"}>
+              <SvgIcons.Plus />
+            </IconWrapper>{" "}
+            Create Playlist
+          </Link>
+        </PlaylistLink>
+        <PlaylistLink main={true}>
+          <Link to="/collection/tracks">
+            <IconWrapper
+              background={"var(--liked-background-color)"}
+              color={"#fff"}
+              size={16}
+            >
+              <SvgIcons.Heart active={true} />
+            </IconWrapper>{" "}
+            Liked Songs
+          </Link>
+        </PlaylistLink>
+        <Divider />
       </MenuLinks>
     </Container>
   );
