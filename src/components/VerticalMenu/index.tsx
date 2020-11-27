@@ -1,11 +1,11 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { Container, Logo, MenuLink, MenuLinks } from "./styles";
 import * as SvgIcons from "../Icons";
-import Link from "next/link";
+import { Link, useHistory } from "react-router-dom";
+
 export default function VerticalMenu() {
-  const router = useRouter();
-  const isActive = (href: string) => router.pathname === href;
+  const history = useHistory();
+  const isActive = (href: string) => history.location.pathname === href;
 
   return (
     <Container>
@@ -15,24 +15,18 @@ export default function VerticalMenu() {
 
       <MenuLinks>
         <MenuLink active={isActive("/")}>
-          <Link href="/" passHref>
-            <a>
-              <SvgIcons.Home active={isActive("/")} /> Home
-            </a>
+          <Link to="/">
+            <SvgIcons.Home active={isActive("/")} /> Home
           </Link>
         </MenuLink>
         <MenuLink active={isActive("/search")}>
-          <Link href="/search">
-            <a>
-              <SvgIcons.Home active={isActive("/search")} /> Search
-            </a>
+          <Link to="/search">
+            <SvgIcons.Home active={isActive("/search")} /> Search
           </Link>
         </MenuLink>
         <MenuLink active={isActive("/playlist")}>
-          <Link href="/playlist">
-            <a>
-              <SvgIcons.Home active={isActive("/playlist")} /> Your Library
-            </a>
+          <Link to="/playlist">
+            <SvgIcons.Home active={isActive("/playlist")} /> Your Library
           </Link>
         </MenuLink>
       </MenuLinks>

@@ -1,11 +1,19 @@
+import { type } from "os";
 import React from "react";
+import Footer from "../Footer";
 import VerticalMenu from "../VerticalMenu";
 import { Grid } from "./styles";
 
-const Layout = ({ children }) => {
+type LayoutProps = {
+  children: any;
+};
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <Grid>
       <VerticalMenu />
+      {children}
+      <Footer />
     </Grid>
   );
 };
