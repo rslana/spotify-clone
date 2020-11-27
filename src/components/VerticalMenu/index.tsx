@@ -21,12 +21,12 @@ export default function VerticalMenu() {
         </MenuLink>
         <MenuLink active={isActive("/search")}>
           <Link to="/search">
-            <SvgIcons.Home active={isActive("/search")} /> Search
+            <SvgIcons.Search active={isActive("/search")} /> Search
           </Link>
         </MenuLink>
         <MenuLink active={isActive("/playlist")}>
           <Link to="/playlist">
-            <SvgIcons.Home active={isActive("/playlist")} /> Your Library
+            <SvgIcons.Library active={isActive("/playlist")} /> Your Library
           </Link>
         </MenuLink>
       </MenuLinks>

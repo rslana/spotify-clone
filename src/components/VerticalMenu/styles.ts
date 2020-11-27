@@ -37,9 +37,9 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
   active: props.active,
 }))<MenuLinkProps>`
   a {
-    background: ${props => props.active ? "#282828" : "#000"};
+    background: ${props => props.active ? "var(--gray-color)" : "var(--black-color)"};
     font-weight: 600;
-    color: ${props => props.active ? "#fff" : "#b3b3b3"};
+    color: ${props => props.active ? "#fff" : "var(--gray-text-color)"};
     display: flex;
     align-items: center;
     padding: 0 8px;
