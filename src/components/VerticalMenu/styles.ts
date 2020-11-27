@@ -4,7 +4,7 @@ export const Container = styled.div`
   grid-area: VM; 
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   background: #000;
   color: #fff;
   padding-top: 24px;
