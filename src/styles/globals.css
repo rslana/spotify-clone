@@ -20,6 +20,9 @@ a {
   --green-color: #1db954;
 
   --gray-text-color: #b3b3b3;
+  --gray-scrollbar-color: #4d4d4d;
+  --gray-scrollbar-hover-color: #6d6d6d;
+
   --liked-background-color: linear-gradient(135deg,#450af5,#c4efd9);
 }
 

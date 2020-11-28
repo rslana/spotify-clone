@@ -8,20 +8,22 @@ import {
   PlaylistLink,
   Divider,
   Title,
+  PlaylistList,
 } from "./styles";
 import * as SvgIcons from "../Icons";
 import { Link, useHistory } from "react-router-dom";
+import { usePlayer } from "../../contexts/player";
 
 export default function VerticalMenu() {
   const history = useHistory();
   const isActive = (href: string) => history.location.pathname === href;
+  const { myPlaylists } = usePlayer();
 
   return (
     <Container>
       <Logo>
         <SvgIcons.Spotify />
       </Logo>
-
       <MenuLinks>
         <MenuLink active={isActive("/")}>
           <Link to="/">
@@ -62,6 +64,15 @@ export default function VerticalMenu() {
           </Link>
         </PlaylistLink>
         <Divider />
+        <PlaylistList>
+          {myPlaylists.map((playlist) => {
+            return (
+              <MenuLink active={isActive("/")} size="small" key={playlist._id}>
+                <Link to="/">{playlist.name}</Link>
+              </MenuLink>
+            );
+          })}
+        </PlaylistList>
       </MenuLinks>
     </Container>
   );

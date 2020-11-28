@@ -5,9 +5,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: calc(100vh - 90px);
   background: #000;
   color: #fff;
   padding-top: 24px;
+  overflow: hidden;
+  position: relative;
 `;
 
 export const Logo = styled.a`
@@ -29,11 +32,15 @@ export const MenuLinks = styled.div`
   margin-top: 24px;
 `;
 
+export type SIZES = 'small' | 'normal' | 'big'
 type MenuLinkProps = {
   active?: boolean
+  size?: SIZES
 }
+
 export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
   active: props.active,
+  size: props.size,
 }))<MenuLinkProps>`
   a {
     background: ${props => props.active ? "var(--gray-color)" : "var(--black-color)"};
@@ -46,6 +53,17 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
     padding: 0 16px;
     height: 40px;
     font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    ${(props) => props.size === "small" && `
+      background: transparent;
+      font-weight: 400;
+      height: initial;
+      display: block;
+      padding: 8px;
+    `}
   }
   a {
     svg {
@@ -123,4 +141,39 @@ export const Divider = styled.div`
   height: 1px;
   background-color: var(--gray-color);
   margin: 8px auto;
+`;
+
+export const PlaylistList = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 4px;
+  width: calc(100% - 12px);
+  left: 8px;
+  top: 360px;
+
+  ::-webkit-scrollbar {
+    width: 16px;
+    max-height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: transparent; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    opacity: .9;
+    background: var(--gray-scrollbar-color); 
+    border-radius: 0;
+    transition: 600ms;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-scrollbar-hover-color); 
+  }
 `;
