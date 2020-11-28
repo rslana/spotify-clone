@@ -17,7 +17,7 @@ import { usePlayer } from "../../contexts/player";
 
 export default function VerticalMenu() {
   const history = useHistory();
-  const { myPlaylists, showAlbum, setShowAlbum, song } = usePlayer();
+  const { myPlaylists, userConfig, setShowAlbum, song } = usePlayer();
   const isActive = (href: string) => history.location.pathname === href;
 
   return (
@@ -65,7 +65,7 @@ export default function VerticalMenu() {
           </Link>
         </PlaylistLink>
         <Divider />
-        <PlaylistList shrink={!showAlbum}>
+        <PlaylistList shrink={!userConfig.showAlbum}>
           {myPlaylists.map((playlist) => {
             return (
               <MenuLink
@@ -81,8 +81,8 @@ export default function VerticalMenu() {
         {!!song && (
           <Album
             cover={song.cover}
-            show={!showAlbum}
-            onClick={() => setShowAlbum(!showAlbum)}
+            show={!userConfig.showAlbum}
+            onClick={() => setShowAlbum(!userConfig.showAlbum)}
           />
         )}
       </MenuLinks>

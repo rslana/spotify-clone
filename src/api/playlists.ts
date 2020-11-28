@@ -1,4 +1,4 @@
-import { getRandomName, getRandomPlaylistName } from "../helper/uniqueNames"
+import { getRandomName, getRandomPlaylistName } from "../helpers/uniqueNames"
 
 export type Playlist = {
   _id: string

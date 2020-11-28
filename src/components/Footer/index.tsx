@@ -12,7 +12,7 @@ import {
 import { usePlayer } from "../../contexts/player";
 
 const Footer = () => {
-  const { showAlbum, setShowAlbum, song } = usePlayer();
+  const { userConfig, setShowAlbum, song } = usePlayer();
 
   return (
     <Container>
@@ -20,8 +20,8 @@ const Footer = () => {
         {!!song && (
           <Album
             cover={song.cover}
-            show={showAlbum}
-            onClick={() => setShowAlbum(!showAlbum)}
+            show={userConfig.showAlbum}
+            onClick={() => setShowAlbum(!userConfig.showAlbum)}
           />
         )}
         <Wrapper>

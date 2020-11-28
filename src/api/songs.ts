@@ -1,4 +1,4 @@
-import { getRandomName } from "../helper/uniqueNames"
+import { getRandomName, getRandomSongName } from "../helpers/uniqueNames"
 
 export type Song = {
   _id: string
@@ -18,7 +18,7 @@ const songs:Song[] = [
   },
   {
     _id:"2",
-    name: "Another Brick In The Wall, Pt. 2",
+    name: getRandomSongName(),
     author: getRandomName(),
     cover: "https://source.unsplash.com/random/232x232",
     liked: true
