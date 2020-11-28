@@ -48,7 +48,6 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
     color: ${props => props.active ? "#fff" : "var(--gray-text-color)"};
     display: flex;
     align-items: center;
-    padding: 0 8px;
     border-radius: 4px;
     padding: 0 16px;
     height: 40px;

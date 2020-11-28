@@ -5,7 +5,7 @@ import "./styles/globals.css";
 import Layout from "./components/Layout";
 
 import Home from "./pages";
-import Playlist from "./pages/playlist";
+import Collection from "./pages/collection";
 import Search from "./pages/search";
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
       </Helmet>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/playlist" exact component={Playlist} />
+        <Route path="/collection/:page" exact component={Collection} />
         <Route path="/search" exact component={Search} />
       </Switch>
     </Layout>

@@ -122,3 +122,69 @@ export const Plus = ({ active }: IconProps) =>
       <path d="m28 20h-8v8h-4v-8h-8v-4h8v-8h4v8h8v4z"></path>
     </svg>
   );
+
+export const ArrowLeft = ({ active }: IconProps) =>
+  active ? (
+    <svg
+      role="img"
+      focusable="false"
+      height="24"
+      width="24"
+      viewBox="0 0 24 24"
+    >
+      <polyline
+        points="16 4 7 12 16 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1pt"
+      ></polyline>
+    </svg>
+  ) : (
+    <svg
+      role="img"
+      focusable="false"
+      height="24"
+      width="24"
+      viewBox="0 0 24 24"
+    >
+      <polyline
+        points="16 4 7 12 16 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1pt"
+      ></polyline>
+    </svg>
+  );
+
+export const ArrowRight = ({ active }: IconProps) =>
+  active ? (
+    <svg
+      role="img"
+      focusable="false"
+      height="24"
+      width="24"
+      viewBox="0 0 24 24"
+    >
+      <polyline
+        points="8 4 17 12 8 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1pt"
+      ></polyline>
+    </svg>
+  ) : (
+    <svg
+      role="img"
+      focusable="false"
+      height="24"
+      width="24"
+      viewBox="0 0 24 24"
+    >
+      <polyline
+        points="8 4 17 12 8 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1pt"
+      ></polyline>
+    </svg>
+  );

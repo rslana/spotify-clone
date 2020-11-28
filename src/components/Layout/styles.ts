@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: 232px auto;
-  grid-template-rows: auto 60px 90px;
+  grid-template-rows: 60px auto 90px;
 
   // VM - Vertical Menu
   // HE - Header

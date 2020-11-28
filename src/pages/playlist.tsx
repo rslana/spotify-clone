@@ -1,9 +1,10 @@
 import React from "react";
+import { Container } from "../styles/pages";
 
 export default function Playlist() {
   return (
-    <div>
+    <Container>
       <h1>Spotify Playlists</h1>
-    </div>
+    </Container>
   );
 }

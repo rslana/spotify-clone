@@ -19,7 +19,7 @@ export default function VerticalMenu() {
   const history = useHistory();
   const { myPlaylists, userConfig, setShowAlbum, song } = usePlayer();
   const isActive = (href: string) => history.location.pathname === href;
-
+  console.log(history.location);
   return (
     <Container>
       <Logo>
@@ -36,9 +36,9 @@ export default function VerticalMenu() {
             <SvgIcons.Search active={isActive("/search")} /> Search
           </Link>
         </MenuLink>
-        <MenuLink active={isActive("/playlist")}>
-          <Link to="/playlist">
-            <SvgIcons.Library active={isActive("/playlist")} /> Your Library
+        <MenuLink active={isActive("/playlists")}>
+          <Link to="/collection/playlists">
+            <SvgIcons.Library active={isActive("/playlists")} /> Your Library
           </Link>
         </MenuLink>
       </MenuLinks>
