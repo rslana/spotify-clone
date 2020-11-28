@@ -26,5 +26,25 @@ a {
   --liked-background-color: linear-gradient(135deg,#450af5,#c4efd9);
 }
 
+::-webkit-scrollbar {
+  width: 16px;
+  max-height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  opacity: .9;
+  background: var(--gray-scrollbar-color); 
+  border-radius: 0;
+  transition: 600ms;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-scrollbar-hover-color); 
+}
+
 
 

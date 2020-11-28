@@ -9,6 +9,7 @@ import {
   Divider,
   Title,
   PlaylistList,
+  Album,
 } from "./styles";
 import * as SvgIcons from "../Icons";
 import { Link, useHistory } from "react-router-dom";
@@ -16,8 +17,8 @@ import { usePlayer } from "../../contexts/player";
 
 export default function VerticalMenu() {
   const history = useHistory();
+  const { myPlaylists, showAlbum, setShowAlbum, song } = usePlayer();
   const isActive = (href: string) => history.location.pathname === href;
-  const { myPlaylists } = usePlayer();
 
   return (
     <Container>
@@ -64,15 +65,26 @@ export default function VerticalMenu() {
           </Link>
         </PlaylistLink>
         <Divider />
-        <PlaylistList>
+        <PlaylistList shrink={!showAlbum}>
           {myPlaylists.map((playlist) => {
             return (
-              <MenuLink active={isActive("/")} size="small" key={playlist._id}>
-                <Link to="/">{playlist.name}</Link>
+              <MenuLink
+                active={isActive(`/playlist/${playlist._id}`)}
+                size="small"
+                key={playlist._id}
+              >
+                <Link to={`/playlist/${playlist._id}`}>{playlist.name}</Link>
               </MenuLink>
             );
           })}
         </PlaylistList>
+        {!!song && (
+          <Album
+            cover={song.cover}
+            show={!showAlbum}
+            onClick={() => setShowAlbum(!showAlbum)}
+          />
+        )}
       </MenuLinks>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { getRandomName } from "../helper/uniqueNames"
+import { getRandomName, getRandomPlaylistName } from "../helper/uniqueNames"
 
 export type Playlist = {
   _id: string
@@ -10,9 +10,9 @@ export type Playlist = {
 
 const playlists:Playlist[] = [...Array(20)].map((p, index) => ({
   _id: `id-${index}`,
-  name: getRandomName(),
-  author: "The Police",
-  cover: "/images/covers/albums/the-police/outlandos-d-amour.jpg",
+  name: getRandomPlaylistName(),
+  author: getRandomName(),
+  cover: "https://source.unsplash.com/random/232x232",
   liked: true
 }))
 

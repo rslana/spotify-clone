@@ -56,6 +56,7 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    transition: 400ms;
 
     ${(props) => props.size === "small" && `
       background: transparent;
@@ -64,8 +65,11 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
       display: block;
       padding: 8px;
     `}
-  }
-  a {
+    
+    &:hover {
+      color: #fff;
+    }
+
     svg {
       margin-right: 16px;
     }
@@ -143,7 +147,14 @@ export const Divider = styled.div`
   margin: 8px auto;
 `;
 
-export const PlaylistList = styled.div`
+
+type PlaylistListProps = {
+  shrink?: boolean
+}
+
+export const PlaylistList = styled.div.attrs((props:PlaylistListProps) => ({
+  shrink: props.shrink
+}))<PlaylistListProps>`
   display: flex;
   flex-direction: column;
   padding: 0 8px;
@@ -152,28 +163,29 @@ export const PlaylistList = styled.div`
   overflow: hidden;
   overflow-y: auto;
   position: absolute;
-  bottom: 4px;
+  bottom: ${props => props.shrink ? "236px" : "4px"};
   width: calc(100% - 12px);
   left: 8px;
   top: 360px;
-
-  ::-webkit-scrollbar {
-    width: 16px;
-    max-height: 16px;
-  }
-
-  ::-webkit-scrollbar-track {
-    box-shadow: transparent; 
-  }
-
-  ::-webkit-scrollbar-thumb {
-    opacity: .9;
-    background: var(--gray-scrollbar-color); 
-    border-radius: 0;
-    transition: 600ms;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--gray-scrollbar-hover-color); 
-  }
 `;
+
+type AlbumProps = {
+  cover: string
+  show?: boolean
+}
+
+export const Album = styled.div.attrs((props:AlbumProps) => ({
+  show: props.show
+}))<AlbumProps>`
+  width: 232px;
+  height: 232px;
+  transition: 300ms;
+  background-image: ${props => `url(${props.cover})`};
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  bottom: ${props => props.show ? "0" : "-232px"};
+`

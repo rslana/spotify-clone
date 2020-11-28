@@ -42,7 +42,7 @@ export const Album = styled.div.attrs((props:AlbumProps) => ({
   height: 56px;
   transition: 300ms;
   background-image: ${props => `url(${props.cover})`};
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin-right: 16px;

@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { findMyPlaylists, Playlist } from "../api/playlists";
+import { findSongById, Song } from "../api/songs";
 
 export interface PlayerContextType {
   showAlbum: boolean;
   setShowAlbum(showAlbum: boolean): void;
+  song: Song;
+  setSong(song: Song): void;
   myPlaylists: Playlist[];
   setMyPlaylists(playlists: Playlist[]): void;
 }
@@ -15,16 +18,20 @@ export default function PlayerContextProvider(
 ) {
   const [showAlbum, setShowAlbum] = useState<boolean>(true);
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
+  const [song, setSong] = useState<Song>();
 
   const contextValue = {
     showAlbum,
     setShowAlbum,
     myPlaylists,
     setMyPlaylists,
+    song,
+    setSong,
   } as PlayerContextType;
 
   useEffect(() => {
     setMyPlaylists(findMyPlaylists());
+    setSong(findSongById("2"));
   }, []);
 
   return (

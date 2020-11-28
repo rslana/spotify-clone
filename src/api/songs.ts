@@ -1,3 +1,4 @@
+import { getRandomName } from "../helper/uniqueNames"
 
 export type Song = {
   _id: string
@@ -11,8 +12,15 @@ const songs:Song[] = [
   {
     _id:"1",
     name: "Roxanne",
-    author: "The Police",
+    author: getRandomName(),
     cover: "/images/covers/albums/the-police/outlandos-d-amour.jpg",
+    liked: true
+  },
+  {
+    _id:"2",
+    name: "Another Brick In The Wall, Pt. 2",
+    author: getRandomName(),
+    cover: "https://source.unsplash.com/random/232x232",
     liked: true
   }
 ]

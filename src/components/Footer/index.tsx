@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Container,
   SongInfo,
@@ -9,15 +9,10 @@ import {
   Album,
   Wrapper,
 } from "./styles";
-import { findSongById, Song } from "../../api/songs";
 import { usePlayer } from "../../contexts/player";
 
 const Footer = () => {
-  const [song, setSong] = useState<Song>();
-  const { showAlbum, setShowAlbum } = usePlayer();
-  useEffect(() => {
-    return setSong(findSongById("1"));
-  }, []);
+  const { showAlbum, setShowAlbum, song } = usePlayer();
 
   return (
     <Container>
