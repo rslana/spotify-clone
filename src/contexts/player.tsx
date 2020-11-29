@@ -9,6 +9,7 @@ import {
 } from "../helpers/storage";
 
 export interface PlayerContextType {
+  loadingApp: boolean;
   showAlbum: boolean;
   setShowAlbum(showAlbum: boolean): void;
   userConfig: UserConfig;
@@ -24,6 +25,7 @@ const PlayerContext = createContext<PlayerContextType>(null!);
 export default function PlayerContextProvider(
   props: React.PropsWithChildren<{}>
 ) {
+  const [loadingApp, setLoadingApp] = useState(true);
   const [userConfig, setUserConfig] = useState<UserConfig>(initUserConfig);
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
   const [song, setSong] = useState<Song>();

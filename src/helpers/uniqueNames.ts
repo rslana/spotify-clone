@@ -1,29 +1,62 @@
-import { uniqueNamesGenerator , adjectives, colors, animals, names} from "unique-names-generator";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+  animals,
+  names,
+} from "unique-names-generator";
 
-export const getRandomPlaylistName = () =>  uniqueNamesGenerator({
-  dictionaries: [adjectives, animals, colors, adjectives],
-  separator: ' ',
-  length: Math.floor((Math.random() * 4 + 1)),
-  style: 'capital'
-});
+export const getRandomLength = (to: number, from: number = 1) => {
+  return Math.floor(Math.random() * (to - from + 1) + from);
+};
 
-export const getRandomName = () =>  uniqueNamesGenerator({
-  dictionaries: [names, names],
-  separator: ' ',
-  length: Math.floor((Math.random() * 2 + 1)),
-  style: 'capital'
-});
+export const getRandomPlaylistName = () =>
+  uniqueNamesGenerator({
+    dictionaries: [adjectives, animals, colors, adjectives],
+    separator: " ",
+    length: getRandomLength(4),
+    style: "capital",
+  });
 
-export const getRandomSongName = () =>  uniqueNamesGenerator({
-  dictionaries: [adjectives, animals, colors],
-  separator: ' ',
-  length: Math.floor((Math.random() * 3 + 1)),
-  style: 'capital'
-});
+export const getRandomName = () =>
+  uniqueNamesGenerator({
+    dictionaries: [names, names],
+    separator: " ",
+    length: getRandomLength(2),
+    style: "capital",
+  });
 
-export const getRandomAlbumName = () =>  uniqueNamesGenerator({
-  dictionaries: [adjectives, animals],
-  separator: ' ',
-  length: Math.floor((Math.random() * 2 + 1)),
-  style: 'capital'
-});
+export const getRandomSongName = () =>
+  uniqueNamesGenerator({
+    dictionaries: [adjectives, animals, colors],
+    separator: " ",
+    length: getRandomLength(3),
+    style: "capital",
+  });
+
+export const getRandomAlbumName = () =>
+  uniqueNamesGenerator({
+    dictionaries: [adjectives, animals],
+    separator: " ",
+    length: getRandomLength(2),
+    style: "capital",
+  });
+
+export const getRandomDescription = () =>
+  uniqueNamesGenerator({
+    dictionaries: [
+      colors,
+      adjectives,
+      animals,
+      adjectives,
+      animals,
+      colors,
+      adjectives,
+      adjectives,
+      animals,
+      colors,
+    ],
+    separator: " ",
+    length: getRandomLength(10, 2),
+    style: "capital",
+  });

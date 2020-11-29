@@ -1,10 +1,11 @@
 import React from "react";
-import { Container } from "../../styles/pages";
+import { Container, Grid, Title } from "../../styles/pages";
 
 export default function Artists() {
   return (
     <Container>
-      <h1>Spotify Artists</h1>
+      <Title>Spotify Artists</Title>
+      <Grid></Grid>
     </Container>
   );
 }

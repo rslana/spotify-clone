@@ -12,6 +12,13 @@ export const Container = styled.div`
   padding: 0 32px;
 `;
 
+export const Actions = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 16px;
+`;
+
 export const Button = styled.button`
   background-color: rgba(0,0,0,.7);
   display: flex;

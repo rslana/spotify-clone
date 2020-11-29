@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button, HeaderLinks, HeaderLink } from "./styles";
+import { Container, Button, HeaderLinks, HeaderLink, Actions } from "./styles";
 import * as SvgIcons from "../Icons";
 import { Link, useHistory } from "react-router-dom";
 
@@ -8,12 +8,14 @@ const Header = () => {
   const isActive = (href: string) => history.location.pathname === href;
   return (
     <Container>
-      <Button onClick={() => history.goBack()}>
-        <SvgIcons.ArrowLeft />
-      </Button>
-      <Button onClick={() => history.goForward()}>
-        <SvgIcons.ArrowRight />
-      </Button>
+      <Actions>
+        <Button onClick={() => history.goBack()}>
+          <SvgIcons.ArrowLeft />
+        </Button>
+        <Button onClick={() => history.goForward()}>
+          <SvgIcons.ArrowRight />
+        </Button>
+      </Actions>
       <HeaderLinks>
         <HeaderLink active={isActive("/collection/playlists")}>
           <Link to="/collection/playlists">Playlists</Link>

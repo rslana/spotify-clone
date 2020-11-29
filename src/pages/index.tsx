@@ -1,13 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Container } from "../styles/pages";
 
 export default function Home() {
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <h1>Spotify Home</h1>
-    </div>
+      <h1>Home</h1>
+    </Container>
   );
 }
