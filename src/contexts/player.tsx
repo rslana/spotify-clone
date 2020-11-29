@@ -5,6 +5,7 @@ import {
   getLocalUserConfig,
   setLocalUserConfig,
   UserConfig,
+  initUserConfig,
 } from "../helpers/storage";
 
 export interface PlayerContextType {
@@ -23,9 +24,7 @@ const PlayerContext = createContext<PlayerContextType>(null!);
 export default function PlayerContextProvider(
   props: React.PropsWithChildren<{}>
 ) {
-  const [userConfig, setUserConfig] = useState<UserConfig>({
-    showAlbum: false,
-  });
+  const [userConfig, setUserConfig] = useState<UserConfig>(initUserConfig);
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
   const [song, setSong] = useState<Song>();
 
@@ -44,9 +43,9 @@ export default function PlayerContextProvider(
   } as PlayerContextType;
 
   useEffect(() => {
+    setUserConfig(getLocalUserConfig());
     setMyPlaylists(findMyPlaylists());
     setSong(findSongById("2"));
-    setUserConfig(getLocalUserConfig());
   }, []);
 
   return (

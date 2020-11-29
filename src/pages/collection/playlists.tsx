@@ -1,7 +1,7 @@
 import React from "react";
-import { Container } from "../styles/pages";
+import { Container } from "../../styles/pages";
 
-export default function Playlist() {
+export default function Playlists() {
   return (
     <Container>
       <h1>Spotify Playlists</h1>

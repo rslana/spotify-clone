@@ -18,8 +18,12 @@ import { usePlayer } from "../../contexts/player";
 export default function VerticalMenu() {
   const history = useHistory();
   const { myPlaylists, userConfig, setShowAlbum, song } = usePlayer();
-  const isActive = (href: string) => history.location.pathname === href;
-  console.log(history.location);
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return history.location.pathname === href;
+    }
+    return history.location.pathname.indexOf(href) === 0;
+  };
   return (
     <Container>
       <Logo>
@@ -36,9 +40,9 @@ export default function VerticalMenu() {
             <SvgIcons.Search active={isActive("/search")} /> Search
           </Link>
         </MenuLink>
-        <MenuLink active={isActive("/playlists")}>
+        <MenuLink active={isActive("/collection")}>
           <Link to="/collection/playlists">
-            <SvgIcons.Library active={isActive("/playlists")} /> Your Library
+            <SvgIcons.Library active={isActive("/collection")} /> Your Library
           </Link>
         </MenuLink>
       </MenuLinks>

@@ -3,9 +3,17 @@ export interface UserConfig {
   showAlbum?:boolean
 }
 
+export const initUserConfig: UserConfig = {
+  showAlbum: false,
+};
+
 export const getLocalUserConfig = () : UserConfig =>  {
   try {
-    return JSON.parse(localStorage.getItem("@USER_CONFIG")!);
+    const userConfig = JSON.parse(localStorage.getItem("@USER_CONFIG")!);
+    if(!userConfig) {
+      return setLocalUserConfig(initUserConfig);
+    }
+    return userConfig;
   } catch (error) {
     console.log(error);
     return {};

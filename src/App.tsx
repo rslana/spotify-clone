@@ -5,8 +5,9 @@ import "./styles/globals.css";
 import Layout from "./components/Layout";
 
 import Home from "./pages";
-import Collection from "./pages/collection";
 import Search from "./pages/search";
+import Playlists from "./pages/collection/playlists";
+import Artists from "./pages/collection/artists";
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
       </Helmet>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/collection/:page" exact component={Collection} />
         <Route path="/search" exact component={Search} />
+        <Route path="/collection/playlists" exact component={Playlists} />
+        <Route path="/collection/artists" exact component={Artists} />
       </Switch>
     </Layout>
   );

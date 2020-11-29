@@ -8,10 +8,10 @@ const Header = () => {
   const isActive = (href: string) => history.location.pathname === href;
   return (
     <Container>
-      <Button>
+      <Button onClick={() => history.goBack()}>
         <SvgIcons.ArrowLeft />
       </Button>
-      <Button>
+      <Button onClick={() => history.goForward()}>
         <SvgIcons.ArrowRight />
       </Button>
       <HeaderLinks>
