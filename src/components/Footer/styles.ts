@@ -8,7 +8,7 @@ export const Container = styled.div`
   background: var(--gray-color);
   color: #fff;
   padding: 0 16px;
-  grid-template-columns: 28% 44% 28%;  
+  grid-template-columns: 30% 40% 30%;
 `;
 
 export const Wrapper = styled.div`
@@ -31,23 +31,23 @@ export const SongInfo = styled.div`
 `;
 
 type AlbumProps = {
-  cover: string
-  show?: boolean
-}
+  cover: string;
+  show?: boolean;
+};
 
-export const Album = styled.div.attrs((props:AlbumProps) => ({
-  show: props.show
+export const Album = styled.div.attrs((props: AlbumProps) => ({
+  show: props.show,
 }))<AlbumProps>`
   width: 56px;
   height: 56px;
   transition: 300ms;
-  background-image: ${props => `url(${props.cover})`};
+  background-image: ${(props) => `url(${props.cover})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin-right: 16px;
-  margin-left: ${props => props.show ? "initial" : "-72px"};
-`
+  margin-left: ${(props) => (props.show ? "initial" : "-72px")};
+`;
 
 export const SongName = styled(Link)`
   display: flex;
@@ -67,11 +67,15 @@ export const AuthorName = styled(Link)`
   color: var(--gray-text-color);
 `;
 
-
 export const Player = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+
+  audio {
+    display: none;
+  }
 `;
 
 export const PlayerConfig = styled.div`

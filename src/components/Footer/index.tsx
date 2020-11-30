@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   SongInfo,
-  Player,
   PlayerConfig,
   SongName,
   AuthorName,
@@ -10,6 +9,7 @@ import {
   Wrapper,
 } from "./styles";
 import { usePlayer } from "../../contexts/player";
+import Player from "../Player";
 
 const Footer = () => {
   const { userConfig, setShowAlbum, song } = usePlayer();
@@ -29,7 +29,7 @@ const Footer = () => {
           <AuthorName to={`/author/${song?.author}`}>{song?.author}</AuthorName>
         </Wrapper>
       </SongInfo>
-      <Player>Player</Player>
+      <Player />
       <PlayerConfig>Player Config</PlayerConfig>
     </Container>
   );

@@ -28,6 +28,7 @@ export default function VerticalMenu() {
     <Container>
       <Logo>
         <SvgIcons.Spotify />
+        <span>Clone</span>
       </Logo>
       <MenuLinks>
         <MenuLink active={isActive("/")}>

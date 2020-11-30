@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  grid-area: VM; 
+  grid-area: VM;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -16,12 +16,19 @@ export const Container = styled.div`
 export const Logo = styled.a`
   display: flex;
   padding-left: 24px;
+  align-items: center;
   svg {
     width: 131px;
     height: 40px;
     path {
       fill: #fff;
     }
+  }
+  span {
+    margin-left: 4px;
+    font-size: 10.5pt;
+    font-weight: 900;
+    letter-spacing: -0.02rem;
   }
 `;
 
@@ -32,20 +39,21 @@ export const MenuLinks = styled.div`
   margin-top: 24px;
 `;
 
-export type SIZES = 'small' | 'normal' | 'big'
+export type SIZES = "small" | "normal" | "big";
 type MenuLinkProps = {
-  active?: boolean
-  size?: SIZES
-}
+  active?: boolean;
+  size?: SIZES;
+};
 
 export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
   active: props.active,
   size: props.size,
 }))<MenuLinkProps>`
   a {
-    background: ${props => props.active ? "var(--gray-color)" : "var(--black-color)"};
+    background: ${(props) =>
+      props.active ? "var(--gray-color)" : "var(--black-color)"};
     font-weight: 600;
-    color: ${props => props.active ? "#fff" : "var(--gray-text-color)"};
+    color: ${(props) => (props.active ? "#fff" : "var(--gray-text-color)")};
     display: flex;
     align-items: center;
     border-radius: 4px;
@@ -57,14 +65,16 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
     overflow: hidden;
     transition: 400ms;
 
-    ${(props) => props.size === "small" && `
+    ${(props) =>
+      props.size === "small" &&
+      `
       background: transparent;
       font-weight: 400;
       height: initial;
       display: block;
       padding: 8px;
     `}
-    
+
     &:hover {
       color: #fff;
     }
@@ -76,17 +86,17 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
 `;
 
 type PlaylistLinkProps = {
-  active?: boolean
-  main?: boolean
-}
+  active?: boolean;
+  main?: boolean;
+};
 export const PlaylistLink = styled.div.attrs((props: PlaylistLinkProps) => ({
   active: props.active,
   main: props.main,
 }))<PlaylistLinkProps>`
   a {
-    opacity: ${props => props.active ? 1 : 0.7};
+    opacity: ${(props) => (props.active ? 1 : 0.7)};
     font-weight: 600;
-    color: ${props => props.active ? "#fff" : "var(--gray-text-color)"};
+    color: ${(props) => (props.active ? "#fff" : "var(--gray-text-color)")};
     display: flex;
     align-items: center;
     padding: 0 8px;
@@ -106,23 +116,23 @@ export const Title = styled.h1`
   font-size: 9pt;
   font-weight: 700;
   line-height: 16px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 12px 16px;
   color: var(--gray-text-color);
 `;
 
 type IconWrapperProps = {
-  background?: string
-  color?: string
-  size?: number
-}
+  background?: string;
+  color?: string;
+  size?: number;
+};
 export const IconWrapper = styled.div.attrs((props: IconWrapperProps) => ({
   background: props.background,
   color: props.color,
-  size: props.size
+  size: props.size,
 }))<IconWrapperProps>`
-  background: ${props => props.background ? props.background : "#fff"};
+  background: ${(props) => (props.background ? props.background : "#fff")};
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -131,11 +141,11 @@ export const IconWrapper = styled.div.attrs((props: IconWrapperProps) => ({
   height: 32px;
   padding: 4px;
   margin-right: 16px;
-  color:  ${props => props.color ? props.color : "#fff"};
+  color: ${(props) => (props.color ? props.color : "#fff")};
 
   svg {
-    width: ${props => props.size ? `${props.size}px` : "32px"};
-    height: ${props => props.size ? `${props.size}px` : "32px"};
+    width: ${(props) => (props.size ? `${props.size}px` : "32px")};
+    height: ${(props) => (props.size ? `${props.size}px` : "32px")};
   }
 `;
 
@@ -146,13 +156,12 @@ export const Divider = styled.div`
   margin: 8px auto;
 `;
 
-
 type PlaylistListProps = {
-  shrink?: boolean
-}
+  shrink?: boolean;
+};
 
-export const PlaylistList = styled.div.attrs((props:PlaylistListProps) => ({
-  shrink: props.shrink
+export const PlaylistList = styled.div.attrs((props: PlaylistListProps) => ({
+  shrink: props.shrink,
 }))<PlaylistListProps>`
   display: flex;
   flex-direction: column;
@@ -162,29 +171,29 @@ export const PlaylistList = styled.div.attrs((props:PlaylistListProps) => ({
   overflow: hidden;
   overflow-y: auto;
   position: absolute;
-  bottom: ${props => props.shrink ? "236px" : "4px"};
+  bottom: ${(props) => (props.shrink ? "236px" : "4px")};
   width: calc(100% - 12px);
   left: 8px;
   top: 360px;
 `;
 
 type AlbumProps = {
-  cover: string
-  show?: boolean
-}
+  cover: string;
+  show?: boolean;
+};
 
-export const Album = styled.div.attrs((props:AlbumProps) => ({
-  show: props.show
+export const Album = styled.div.attrs((props: AlbumProps) => ({
+  show: props.show,
 }))<AlbumProps>`
   width: 232px;
   height: 232px;
   transition: 300ms;
-  background-image: ${props => `url(${props.cover})`};
+  background-image: ${(props) => `url(${props.cover})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   left: 0;
   bottom: 0;
-  bottom: ${props => props.show ? "0" : "-232px"};
-`
+  bottom: ${(props) => (props.show ? "0" : "-232px")};
+`;

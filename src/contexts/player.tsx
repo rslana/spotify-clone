@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { findMyPlaylists, Playlist } from "../api/playlists";
-import { findSongById, Song } from "../api/songs";
+import { findSongById, Song, initSongState } from "../api/songs";
 import {
   getLocalUserConfig,
   setLocalUserConfig,
   UserConfig,
-  initUserConfig,
+  initUserConfigState,
 } from "../helpers/storage";
 
 export interface PlayerContextType {
@@ -25,10 +25,9 @@ const PlayerContext = createContext<PlayerContextType>(null!);
 export default function PlayerContextProvider(
   props: React.PropsWithChildren<{}>
 ) {
-  const [loadingApp, setLoadingApp] = useState(true);
-  const [userConfig, setUserConfig] = useState<UserConfig>(initUserConfig);
+  const [userConfig, setUserConfig] = useState<UserConfig>(initUserConfigState);
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
-  const [song, setSong] = useState<Song>();
+  const [song, setSong] = useState<Song>(initSongState);
 
   const setShowAlbum = (showAlbum: boolean) => {
     setUserConfig(setLocalUserConfig({ ...userConfig, showAlbum }));
