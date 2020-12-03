@@ -32,14 +32,53 @@ export const PlaybackTime = styled.div`
 `;
 
 export const ProgressBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   width: 100%;
   height: 4px;
   border-radius: 2px;
   background-color: var(--gray-lighter-color);
   margin: auto 8px;
+
+  & > ::-webkit-slider-thumb {
+    display: none;
+  }
+  &:hover {
+    & > ::-webkit-slider-thumb {
+      display: initial;
+    }
+    div {
+      background-color: var(--green-color) !important;
+    }
+  }
+`;
+
+type ProgressBarTrackProps = {
+  progress: number;
+};
+
+export const ProgressBarTrack = styled.div.attrs(
+  (props: ProgressBarTrackProps) => ({
+    progress: props.progress,
+  })
+)<ProgressBarTrackProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${(props) => `${props.progress}%`};
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--gray-text-color);
+`;
+
+export const ProgressBarRange = styled.input`
+  box-sizing: border-box;
+  background-color: initial;
+  outline: none !important;
+  border: none;
+  display: block;
+  position: relative;
+  margin: 0;
+  appearance: none;
 `;
 
 type ButtonProps = {

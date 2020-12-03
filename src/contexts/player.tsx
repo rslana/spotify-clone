@@ -21,7 +21,7 @@ export interface PlayerContextType {
   userConfig: UserConfig;
   setUserConfig(userConfig: UserConfig): void;
   song: Song;
-  setSong(song: Song): void;
+  setSong<Song>(song: Song): void;
   myPlaylists: Playlist[];
   setMyPlaylists(playlists: Playlist[]): void;
   audioElement: HTMLAudioElement | null;
@@ -49,11 +49,7 @@ export default function PlayerContextProvider(
     setMyPlaylists(findMyPlaylists());
     const songFound = findSongById("id-02");
     if (songFound) {
-      setSong((oldState) => ({
-        ...oldState,
-        ...songFound,
-        playlist: findPlaylistById("id-01"),
-      }));
+      setSong({ ...songFound, playlist: findPlaylistById("id-0") });
     }
   }, []);
 
@@ -69,6 +65,18 @@ export default function PlayerContextProvider(
       playPause();
     }
   }, [audioElement, song]);
+
+  const newSong = (song: Song) => {
+    const audio = audioElement;
+    audio.src = song.url;
+    audio.onloadeddata = () => {
+      setAudioElement(audio);
+      setSong({
+        ...song,
+        playing: true,
+      });
+    };
+  };
 
   const playSong = (props?: PlaySongProps) => {
     if (props?.playlist?._id) {
@@ -99,27 +107,20 @@ export default function PlayerContextProvider(
             playing: !song.playing,
           });
         } else {
-          const audio = audioElement;
-          audio.src = songFound.url;
-          audio.onloadeddata = () => {
-            setAudioElement(audio);
-            setSong({
-              ...songFound,
-              playlist: props.playlist,
-              playing: true,
-            });
-          };
+          newSong({
+            ...songFound,
+            playlist: props.playlist,
+          });
         }
       }
     } else if (props?.song) {
-      const audio = audioElement;
-      audio.src = props.song.url;
-      audio.onloadeddata = () => {
-        setAudioElement(audio);
-        setSong({ ...props.song!, playing: true });
-      };
+      newSong(props.song!);
     } else if (song) {
-      setSong({ ...song, playing: !song.playing });
+      if (!audioElement || !audioElement.src) {
+        newSong(song);
+      } else {
+        setSong({ ...song, playing: !song.playing });
+      }
     }
   };
 

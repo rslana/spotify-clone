@@ -54,5 +54,19 @@ a {
   background: var(--gray-scrollbar-focus-color); 
 }
 
+input[type=range] {
+  appearance: none;
+  width: 100%;
+  top: -7px;
+  height: 12px;
+}
 
-
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #fff !important;
+  cursor: default;
+  margin-top: 0;
+}
