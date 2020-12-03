@@ -4,25 +4,39 @@ import {
   Container,
   Grid,
   Title,
-  GridCol,
+  Card,
   Cover,
   CoverTitle,
   CoverDescription,
+  CoverPlayButton,
 } from "../../styles/pages";
+import * as SvgIcons from "../../components/Icons/";
 
 export default function Playlists() {
-  const { myPlaylists } = usePlayer();
+  const { myPlaylists, song, playSong } = usePlayer();
+
   return (
     <Container>
       <Title>Playlists</Title>
       <Grid>
         {myPlaylists.map((playlist) => {
           return (
-            <GridCol key={playlist._id}>
-              <Cover cover={playlist.cover} />
+            <Card key={playlist._id}>
+              <Cover cover={playlist.cover}>
+                <CoverPlayButton
+                  active={song.playlist?._id === playlist._id}
+                  onClick={() => playSong({ playlist })}
+                >
+                  {song?.playing && song.playlist?._id === playlist._id ? (
+                    <SvgIcons.Pause />
+                  ) : (
+                    <SvgIcons.Play />
+                  )}
+                </CoverPlayButton>
+              </Cover>
               <CoverTitle>{playlist.name}</CoverTitle>
               <CoverDescription>{playlist.description}</CoverDescription>
-            </GridCol>
+            </Card>
           );
         })}
       </Grid>

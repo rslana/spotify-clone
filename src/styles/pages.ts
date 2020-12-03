@@ -10,6 +10,10 @@ export const Container = styled.div`
   padding: 0 32px;
   color: #fff;
   padding-bottom: 90px;
+  ::-webkit-scrollbar-track {
+    box-shadow: transparent;
+    margin-top: -60px;
+  }
 `;
 
 export const Grid = styled.div`
@@ -27,7 +31,7 @@ export const Title = styled.h1`
   margin: 16px 0;
 `;
 
-export const GridCol = styled.div`
+export const Card = styled.div`
   background: var(--gray-darker-color);
   transition: background-color 0.3s ease;
   padding: 16px;
@@ -37,6 +41,11 @@ export const GridCol = styled.div`
 
   &:hover {
     background: var(--gray-color);
+
+    button {
+      bottom: 8px;
+      opacity: 1;
+    }
   }
 `;
 
@@ -59,6 +68,38 @@ export const Cover = styled.div.attrs((props: CoverProps) => ({
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  position: relative;
+`;
+
+type CoverPlayButtonProps = {
+  active?: boolean;
+};
+
+export const CoverPlayButton = styled.button.attrs(
+  (props: CoverPlayButtonProps) => ({
+    active: props.active,
+  })
+)<CoverPlayButtonProps>`
+  width: clamp(36px, 2.6vw, 40px);
+  height: clamp(36px, 2.6vw, 40px);
+  transition: 300ms;
+  background-color: var(--green-color);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  bottom: ${(props) => (props.active ? "8px" : "-20px")};
+  opacity: ${(props) => (props.active ? "1" : "0")};
+  outline: none;
+
+  &:hover {
+    transition: all 0ms;
+    transform: scale(1.06);
+  }
 `;
 
 export const CoverTitle = styled.h1`

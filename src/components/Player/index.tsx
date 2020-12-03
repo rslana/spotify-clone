@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Container,
   Button,
@@ -11,25 +11,7 @@ import * as SvgIcons from "../Icons";
 import { usePlayer } from "../../contexts/player";
 
 export default function Player() {
-  const { song, setSong } = usePlayer();
-  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
-    null
-  );
-
-  const playSong = () => {
-    if (audioElement && song) {
-      audioElement.paused ? audioElement.play() : audioElement.pause();
-      setSong({ ...song, playing: !song.playing });
-    }
-  };
-
-  useEffect(() => {
-    if (!audioElement && song?.url) {
-      const audio = new Audio(song.url);
-      audio.src = song.url;
-      audio.onloadeddata = () => setAudioElement(audio);
-    }
-  }, [song, audioElement]);
+  const { song, playSong } = usePlayer();
 
   return (
     <Container>
@@ -40,7 +22,7 @@ export default function Player() {
         <Button>
           <SvgIcons.Backward />
         </Button>
-        <Button main={true} onClick={playSong} disabled={!song}>
+        <Button main={true} onClick={() => playSong()} disabled={!song}>
           {song?.playing ? <SvgIcons.Pause /> : <SvgIcons.Play />}
         </Button>
         <Button>

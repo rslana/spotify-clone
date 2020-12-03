@@ -15,10 +15,6 @@ export const PlayerControls = styled.div`
   justify-content: center;
   width: 100%;
   margin-bottom: 12px;
-
-  /* audio {
-    display: none;
-  } */
 `;
 
 export const PlaybackBar = styled.div`

@@ -58,7 +58,7 @@ export const SongName = styled(Link)`
   font-weight: 400;
 `;
 
-export const AuthorName = styled(Link)`
+export const ArtistName = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;

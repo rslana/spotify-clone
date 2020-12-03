@@ -25,13 +25,14 @@ a {
   --gray-text-color: #b3b3b3;
   --gray-scrollbar-color: #4d4d4d;
   --gray-scrollbar-hover-color: #6d6d6d;
+  --gray-scrollbar-focus-color: #7e7e7e;
+
 
   --liked-background-color: linear-gradient(135deg,#450af5,#c4efd9);
 }
 
 ::-webkit-scrollbar {
   width: 16px;
-  max-height: 16px;
 }
 
 ::-webkit-scrollbar-track {
@@ -47,6 +48,10 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gray-scrollbar-hover-color); 
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--gray-scrollbar-focus-color); 
 }
 
 

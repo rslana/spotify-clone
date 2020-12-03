@@ -4,7 +4,7 @@ import {
   SongInfo,
   PlayerConfig,
   SongName,
-  AuthorName,
+  ArtistName,
   Album,
   Wrapper,
 } from "./styles";
@@ -26,7 +26,7 @@ const Footer = () => {
         )}
         <Wrapper>
           <SongName to={`/song/${song?._id}`}>{song?.name}</SongName>
-          <AuthorName to={`/author/${song?.author}`}>{song?.author}</AuthorName>
+          <ArtistName to={`/artist/${song?.artist}`}>{song?.artist}</ArtistName>
         </Wrapper>
       </SongInfo>
       <Player />

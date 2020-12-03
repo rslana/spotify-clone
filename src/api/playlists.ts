@@ -4,14 +4,16 @@ import {
   getRandomDescription,
   // getRandomLength,
 } from "../helpers/uniqueNames";
+import { findSongs, Song } from "./songs";
 
 export type Playlist = {
   _id: string;
   name: string;
   description: string;
-  author: string;
+  artist: string;
   cover: string;
   liked: boolean;
+  songs: Song[];
 };
 
 const keywords = [
@@ -23,21 +25,28 @@ const keywords = [
   "galaxy",
   "waterfall",
   "thunderstorm",
-  "yoga",
+  "minimalist",
   "plant",
-  "fruit",
-  "people",
-  "skeleton",
-  "rabbit",
+  "universe",
+  "coffee",
+  "ocean",
+  "green",
+  "fish",
+  "tree",
+  "halloween",
+  "leaf",
 ];
+
+const songs = findSongs();
 
 const playlists: Playlist[] = keywords.map((p, index) => ({
   _id: `id-${index}`,
   name: getRandomPlaylistName(),
   description: getRandomDescription(),
-  author: getRandomName(),
+  artist: getRandomName(),
   cover: `https://source.unsplash.com/232x232/?${keywords[index]}`,
   liked: true,
+  songs,
 }));
 
 export const findPlaylistById = (_id: string) => {
