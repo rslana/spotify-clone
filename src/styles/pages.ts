@@ -9,7 +9,7 @@ export const Container = styled.div`
   overflow-y: auto;
   padding: 0 32px;
   color: #fff;
-  padding-bottom: 90px;
+  padding-bottom: 30px;
   ::-webkit-scrollbar-track {
     box-shadow: transparent;
     margin-top: -60px;
@@ -45,6 +45,7 @@ export const Card = styled.div`
     button {
       bottom: 8px;
       opacity: 1;
+      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
     }
   }
 `;
@@ -80,8 +81,8 @@ export const CoverPlayButton = styled.button.attrs(
     active: props.active,
   })
 )<CoverPlayButtonProps>`
-  width: clamp(36px, 2.6vw, 40px);
-  height: clamp(36px, 2.6vw, 40px);
+  width: 40px;
+  height: 40px;
   transition: 300ms;
   background-color: var(--green-color);
   border: none;

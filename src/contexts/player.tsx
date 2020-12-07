@@ -13,6 +13,7 @@ type PlaySongProps = {
   playlist?: Playlist;
   album?: Album;
   song?: Song;
+  playing?: boolean;
 };
 
 export interface PlayerContextType {
@@ -27,6 +28,8 @@ export interface PlayerContextType {
   audioElement: HTMLAudioElement | null;
   setAudioElement(audioElement: HTMLAudioElement): void;
   playSong(playSongProps?: PlaySongProps): void;
+  playNextSong(): void;
+  playPreviousSong(): void;
 }
 
 const PlayerContext = createContext<PlayerContextType>(null!);
@@ -47,9 +50,10 @@ export default function PlayerContextProvider(
   useEffect(() => {
     setUserConfig(getLocalUserConfig());
     setMyPlaylists(findMyPlaylists());
-    const songFound = findSongById("id-02");
+    const songFound = findSongById("id-0");
+    const playlistFound = findPlaylistById("id-0");
     if (songFound) {
-      setSong({ ...songFound, playlist: findPlaylistById("id-0") });
+      setSong({ ...songFound, playlist: playlistFound });
     }
   }, []);
 
@@ -66,30 +70,22 @@ export default function PlayerContextProvider(
     }
   }, [audioElement, song]);
 
-  const newSong = (song: Song) => {
+  const newSong = (song: Song, playing?: boolean) => {
+    playing = typeof playing === "boolean" ? playing : true;
     const audio = audioElement;
     audio.src = song.url;
     audio.onloadeddata = () => {
       setAudioElement(audio);
       setSong({
         ...song,
-        playing: true,
+        playing,
       });
     };
   };
 
   const playSong = (props?: PlaySongProps) => {
     if (props?.playlist?._id) {
-      const findSongByPlaylist = () => {
-        if (props.playlist && props.playlist.songs.length > 0) {
-          return props.song
-            ? props.playlist.songs.find((s) => s._id === song._id)
-            : props.playlist?.songs[0];
-        }
-        return null;
-      };
-
-      const songFound = findSongByPlaylist();
+      const songFound = props.playlist.songsLinkedList;
 
       const isSamePlaylist = () => {
         return song?.playlist?._id === props.playlist?._id;
@@ -100,13 +96,15 @@ export default function PlayerContextProvider(
       };
 
       if (songFound) {
-        if (isSameSong() && isSamePlaylist()) {
+        if (isSameSong() && isSamePlaylist() && audioElement.src) {
+          console.log("SAME SONG - SAME PLAYLIST");
           setSong({
             ...song,
             playlist: props.playlist,
-            playing: !song.playing,
+            playing: props.playing || !song.playing,
           });
         } else {
+          console.log("NEW SONG");
           newSong({
             ...songFound,
             playlist: props.playlist,
@@ -114,13 +112,37 @@ export default function PlayerContextProvider(
         }
       }
     } else if (props?.song) {
-      newSong(props.song!);
+      newSong(props.song);
     } else if (song) {
       if (!audioElement || !audioElement.src) {
         newSong(song);
       } else {
         setSong({ ...song, playing: !song.playing });
       }
+    }
+  };
+
+  const playNextSong = () => {
+    if (song.next) {
+      newSong({
+        ...song.next,
+        playlist: song.next.playlist ? song.next.playlist : song.playlist,
+      });
+    } else {
+      newSong(song, false);
+    }
+  };
+
+  const playPreviousSong = () => {
+    if (song.previous && audioElement.currentTime <= 2) {
+      newSong({
+        ...song.previous,
+        playlist: song.previous.playlist
+          ? song.previous.playlist
+          : song.playlist,
+      });
+    } else {
+      newSong(song, true);
     }
   };
 
@@ -135,6 +157,8 @@ export default function PlayerContextProvider(
     audioElement,
     setAudioElement,
     playSong,
+    playNextSong,
+    playPreviousSong,
   } as PlayerContextType;
 
   return (

@@ -39,6 +39,13 @@ export const MenuLinks = styled.div`
   margin-top: 24px;
 `;
 
+export const PlaylistLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  margin-top: 12px;
+`;
+
 export type SIZES = "small" | "normal" | "big";
 type MenuLinkProps = {
   active?: boolean;
@@ -73,6 +80,7 @@ export const MenuLink = styled.div.attrs((props: MenuLinkProps) => ({
       height: initial;
       display: block;
       padding: 8px;
+      cursor: default;
     `}
 
     &:hover {
@@ -102,7 +110,7 @@ export const PlaylistLink = styled.div.attrs((props: PlaylistLinkProps) => ({
     padding: 0 8px;
     border-radius: 4px;
     padding: 0 16px;
-    height: 40px;
+    height: 42px;
     font-size: 14px;
     transition: opacity 400ms;
 
@@ -174,7 +182,7 @@ export const PlaylistList = styled.div.attrs((props: PlaylistListProps) => ({
   bottom: ${(props) => (props.shrink ? "236px" : "4px")};
   width: calc(100% - 12px);
   left: 8px;
-  top: 360px;
+  top: 350px;
 `;
 
 type AlbumProps = {

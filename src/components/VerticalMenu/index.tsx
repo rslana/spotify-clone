@@ -6,6 +6,7 @@ import {
   MenuLink,
   MenuLinks,
   PlaylistLink,
+  PlaylistLinks,
   Divider,
   Title,
   PlaylistList,
@@ -17,7 +18,7 @@ import { usePlayer } from "../../contexts/player";
 
 export default function VerticalMenu() {
   const history = useHistory();
-  const { myPlaylists, userConfig, setShowAlbum, song } = usePlayer();
+  const { myPlaylists, userConfig, setShowAlbum, song, playSong } = usePlayer();
   const isActive = (href: string) => {
     if (href === "/") {
       return history.location.pathname === href;
@@ -47,7 +48,7 @@ export default function VerticalMenu() {
           </Link>
         </MenuLink>
       </MenuLinks>
-      <MenuLinks>
+      <PlaylistLinks>
         <Title>Playlists</Title>
         <PlaylistLink main={true}>
           <Link to="/create-playlist">
@@ -74,9 +75,13 @@ export default function VerticalMenu() {
           {myPlaylists.map((playlist) => {
             return (
               <MenuLink
-                active={isActive(`/playlist/${playlist._id}`)}
+                active={
+                  isActive(`/playlist/${playlist._id}`) ||
+                  song.playlist?._id === playlist._id
+                }
                 size="small"
                 key={playlist._id}
+                onDoubleClick={() => playSong({ playlist })}
               >
                 <Link to={`/playlist/${playlist._id}`}>{playlist.name}</Link>
               </MenuLink>
@@ -90,7 +95,7 @@ export default function VerticalMenu() {
             onClick={() => setShowAlbum(!userConfig.showAlbum)}
           />
         )}
-      </MenuLinks>
+      </PlaylistLinks>
     </Container>
   );
 }

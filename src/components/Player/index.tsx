@@ -14,17 +14,27 @@ import * as SvgIcons from "../Icons";
 import { usePlayer } from "../../contexts/player";
 
 export default function Player() {
-  const { song, playSong, audioElement } = usePlayer();
+  const {
+    song,
+    playSong,
+    playNextSong,
+    playPreviousSong,
+    audioElement,
+  } = usePlayer();
   const [currentTime, setCurrentTime] = useState<number>(0);
   useEffect(() => {
     if (audioElement) {
-      audioElement.ontimeupdate = function () {
+      audioElement.ontimeupdate = () => {
         if (Math.floor(currentTime) !== Math.floor(audioElement.currentTime)) {
           setCurrentTime(audioElement.currentTime);
         }
       };
+
+      audioElement.onended = () => {
+        playNextSong();
+      };
     }
-  }, [audioElement, currentTime]);
+  }, [audioElement, currentTime, playNextSong]);
 
   function getAudioTime(timeSeconds: number | undefined) {
     if (timeSeconds) {
@@ -52,7 +62,7 @@ export default function Player() {
   }
 
   function handleChangeAudioProgress(e: any) {
-    if (audioElement) {
+    if (audioElement && audioElement.currentTime) {
       audioElement.currentTime = (audioElement.duration * e.target.value) / 100;
     }
   }
@@ -62,13 +72,13 @@ export default function Player() {
         <Button>
           <SvgIcons.Shuffle />
         </Button>
-        <Button>
+        <Button onClick={() => playPreviousSong()}>
           <SvgIcons.Backward />
         </Button>
         <Button main={true} onClick={() => playSong()} disabled={!song}>
           {song?.playing ? <SvgIcons.Pause /> : <SvgIcons.Play />}
         </Button>
-        <Button>
+        <Button onClick={() => playNextSong()}>
           <SvgIcons.Forward />
         </Button>
         <Button>

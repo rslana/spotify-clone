@@ -1,4 +1,4 @@
-import { getRandomName } from "../helpers/uniqueNames";
+import { getRandomName, searchKeywords } from "../helpers/uniqueNames";
 import { Album } from "./albums";
 import { Playlist } from "./playlists";
 
@@ -12,6 +12,8 @@ export type Song = {
   playing?: boolean;
   playlist?: Playlist;
   album?: Album;
+  next?: Song | null;
+  previous?: Song | null;
 };
 
 export const initSongState: Song = {
@@ -26,18 +28,26 @@ export const initSongState: Song = {
 
 const songs: Song[] = [
   {
-    _id: "id-01",
+    _id: "id-0",
+    name: "Sleep On The Floor",
+    artist: getRandomName(),
+    cover: `https://source.unsplash.com/232x232/?${searchKeywords[0]}`,
+    url: "/songs/the_lumineers_sleep_on_the_floor_official_video.mp3",
+    liked: true,
+  },
+  {
+    _id: "id-1",
     name: "Wake Up (Cover)",
     artist: getRandomName(),
-    cover: "/images/covers/albums/the-police/outlandos-d-amour.jpg",
+    cover: `https://source.unsplash.com/232x232/?${searchKeywords[1]}`,
     url: "/songs/jj_shiplett_wake_up_arcade_fire_cover_live_at_siriusxm.mp3",
     liked: true,
   },
   {
-    _id: "id-02",
+    _id: "id-2",
     name: "Where is my mind? (Cover)",
     artist: getRandomName(),
-    cover: "https://source.unsplash.com/random/232x232",
+    cover: `https://source.unsplash.com/232x232/?${searchKeywords[2]}`,
     url: "/songs/where_is_my_mind_pixies_cover_by_alicia_widar.mp3",
     liked: true,
   },

@@ -60,3 +60,24 @@ export const getRandomDescription = () =>
     length: getRandomLength(10, 2),
     style: "capital",
   });
+
+export const searchKeywords = [
+  "water",
+  "landscape",
+  "mountain",
+  "nature",
+  "river",
+  "galaxy",
+  "waterfall",
+  "thunderstorm",
+  "minimalist",
+  "plant",
+  "universe",
+  "coffee",
+  "ocean",
+  "green",
+  "fish",
+  "tree",
+  "halloween",
+  "leaf",
+];
