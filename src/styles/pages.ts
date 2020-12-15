@@ -1,18 +1,23 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  grid-area: PB;
+type ContainerProps = {
+  fluid?: boolean;
+  offset?: boolean;
+};
+
+export const Container = styled.div.attrs((props: ContainerProps) => ({
+  fluid: props.fluid,
+  offset: props.offset,
+}))<ContainerProps>`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-height: calc(100vh - 90px);
-  overflow-y: auto;
-  padding: 0 32px;
+  padding: ${(props) => (props.fluid ? "0" : "0 32px")};
   color: #fff;
-  padding-bottom: 30px;
+  padding-bottom: 32px;
+  position: relative;
+  padding-top: ${(props) => (props.offset ? "60px" : "0")};
   ::-webkit-scrollbar-track {
     box-shadow: transparent;
-    margin-top: -60px;
   }
 `;
 

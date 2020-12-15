@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlayer } from "../../contexts/player";
+import { usePlayer } from "../../../contexts/player";
 import {
   Container,
   Grid,
@@ -9,14 +9,14 @@ import {
   CoverTitle,
   CoverDescription,
   CoverPlayButton,
-} from "../../styles/pages";
-import * as SvgIcons from "../../components/Icons/";
+} from "../../../styles/pages";
+import * as SvgIcons from "../../../components/Icons";
 
 export default function Playlists() {
   const { myPlaylists, song, playSong } = usePlayer();
 
   return (
-    <Container>
+    <Container offset>
       <Title>Playlists</Title>
       <Grid>
         {myPlaylists.map((playlist) => {

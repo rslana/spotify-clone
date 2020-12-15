@@ -26,6 +26,7 @@ export const initSongState: Song = {
   playing: false,
 };
 
+// Static songs
 const songs: Song[] = [
   {
     _id: "id-0",

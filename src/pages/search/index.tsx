@@ -1,14 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Container, Grid } from "../styles/pages";
+import { Container, Grid, Title } from "../../styles/pages";
 
 export default function Search() {
   return (
-    <Container>
+    <Container offset>
       <Helmet>
         <title>Search</title>
       </Helmet>
-      <h1>Search</h1>
+      <Title>Search</Title>
       <Grid></Grid>
     </Container>
   );

@@ -30,6 +30,8 @@ export interface PlayerContextType {
   playSong(playSongProps?: PlaySongProps): void;
   playNextSong(): void;
   playPreviousSong(): void;
+  playlist: Playlist;
+  setPlaylist(playlist: Playlist): void;
 }
 
 const PlayerContext = createContext<PlayerContextType>(null!);
@@ -39,6 +41,7 @@ export default function PlayerContextProvider(
 ) {
   const [userConfig, setUserConfig] = useState<UserConfig>(initUserConfigState);
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
+  const [playlist, setPlaylist] = useState<Playlist>();
   const [song, setSong] = useState<Song>(initSongState);
   const [audioElement, setAudioElement] = useState<HTMLAudioElement>(
     new Audio()
@@ -159,6 +162,8 @@ export default function PlayerContextProvider(
     playSong,
     playNextSong,
     playPreviousSong,
+    playlist,
+    setPlaylist,
   } as PlayerContextType;
 
   return (

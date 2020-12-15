@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  grid-area: HE;
+  grid-area: MV;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 60px;
-  background: transparent;
+  /* background: var(--gray-darker-color); */
+  background: rgba(24, 24, 24, 0.5);
   color: #fff;
   padding: 0 32px;
+  z-index: 10;
 `;
 
 export const Actions = styled.div`
@@ -20,7 +22,7 @@ export const Actions = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   font-weight: 900;
@@ -39,23 +41,24 @@ export const Button = styled.button`
   }
 `;
 
-export const HeaderLinks = styled.div`
+export const NavbarLinks = styled.div`
   display: flex;
   flex-direction: row;
   padding: 0 8px;
 `;
 
-type HeaderLinkProps = {
-  active?: boolean
-}
+type NavbarLinkProps = {
+  active?: boolean;
+};
 
-export const HeaderLink = styled.div.attrs((props: HeaderLinkProps) => ({
-  active: props.active
-}))<HeaderLinkProps>`
+export const NavbarLink = styled.div.attrs((props: NavbarLinkProps) => ({
+  active: props.active,
+}))<NavbarLinkProps>`
   a {
-    background: ${props => props.active ? "var(--gray-color)" : "transparent"};
+    background: ${(props) =>
+      props.active ? "var(--gray-color)" : "transparent"};
     font-weight: 600;
-    color: ${props => props.active ? "#fff" : "var(--gray-text-color)"};
+    color: ${(props) => (props.active ? "#fff" : "var(--gray-text-color)")};
     display: flex;
     align-items: center;
     border-radius: 4px;
@@ -64,7 +67,7 @@ export const HeaderLink = styled.div.attrs((props: HeaderLinkProps) => ({
     font-size: 10.5pt;
     transition: 400ms;
     margin-right: 8px;
-    
+
     &:hover {
       color: #fff;
     }

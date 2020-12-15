@@ -1,14 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Container } from "../styles/pages";
+import { Container, Title } from "../styles/pages";
 
 export default function Home() {
   return (
-    <Container>
+    <Container offset>
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <h1>Home</h1>
+      <Title>Home</Title>
     </Container>
   );
 }
