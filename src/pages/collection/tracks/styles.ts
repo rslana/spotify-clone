@@ -10,8 +10,7 @@ export const Header = styled.div.attrs((props) => ({
   display: flex;
   width: 100%;
   height: 340px;
-  background-color: ${(props) =>
-    props.color ? props.color : "rgb(248, 56, 56)"};
+  background-color: ${(props) => (props.color ? props.color : "#5038a0")};
   padding: 24px 32px;
   position: relative;
   &::before {

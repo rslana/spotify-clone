@@ -9,12 +9,13 @@ const Navbar = () => {
   const history = useHistory();
   const isActive = (href: string) => history.location.pathname === href;
 
-  const { playlist, setPlaylist } = usePlayer();
+  const { setPlaylist } = usePlayer();
 
   useEffect(() => {
     const likedSongs = findMainPlaylist();
     setPlaylist(likedSongs);
   }, [setPlaylist]);
+
   return (
     <Container>
       <Actions>

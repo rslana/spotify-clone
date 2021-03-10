@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlayer } from "../../../contexts/player";
+// import { usePlayer } from "../../../contexts/player";
 import { Container } from "../../../styles/pages";
 import {
   Cover,
@@ -33,64 +33,7 @@ export default function Tracks() {
           </HeaderInfoSection>
         </HeaderInfo>
       </Header>
-      <div>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-        <h2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-          consequuntur!
-        </h2>
-      </div>
+      <div></div>
     </Container>
   );
 }

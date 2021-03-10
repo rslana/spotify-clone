@@ -52,6 +52,14 @@ const songs: Song[] = [
     url: "/songs/where_is_my_mind_pixies_cover_by_alicia_widar.mp3",
     liked: true,
   },
+  {
+    _id: "id-3",
+    name: "Fly me to the moon (Cover)",
+    artist: getRandomName(),
+    cover: `https://source.unsplash.com/232x232/?${searchKeywords[2]}`,
+    url: "/songs/frank_sinatra_fly_me_to_the_moon_cover_nursena_yener.mp3",
+    liked: true,
+  },
 ];
 
 export const findSongById = (_id: string) => {
