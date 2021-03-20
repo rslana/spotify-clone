@@ -2,27 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   color: var(--gray-text-color);
   width: 100%;
 `;
 
-export const PlayerControls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 12px;
-`;
-
-export const PlaybackBar = styled.div`
+export const VolumeBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--gray-text-color);
   width: 100%;
+  max-width: 93px;
   height: 16px;
 `;
 
@@ -64,13 +57,11 @@ export const ProgressBarTrack = styled.div.attrs(
     style: {
       width: `${props.progress}%`,
     },
-    // progress: props.progress,
   })
 )<ProgressBarTrackProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: ${(props) => `${props.progress}%`}; */
   height: 4px;
   border-radius: 2px;
   background-color: var(--gray-text-color);
@@ -120,7 +111,6 @@ export const Button = styled.button.attrs((props: ButtonProps) => ({
   border: ${(props) =>
     props.main ? "solid 1px var(--gray-text-color)" : "none"};
   border-radius: 50%;
-  margin-right: 16px;
   outline: none;
 
   &:hover {

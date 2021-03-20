@@ -77,9 +77,3 @@ export const Player = styled.div`
     display: none;
   }
 `;
-
-export const PlayerConfig = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;

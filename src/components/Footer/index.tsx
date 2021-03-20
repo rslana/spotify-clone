@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   SongInfo,
-  PlayerConfig,
   SongName,
   ArtistName,
   Album,
@@ -10,6 +9,7 @@ import {
 } from "./styles";
 import { usePlayer } from "../../contexts/player";
 import Player from "../Player";
+import PlayerConfig from "../PlayerConfig";
 
 const Footer = () => {
   const { userConfig, setShowAlbum, song } = usePlayer();
@@ -30,7 +30,7 @@ const Footer = () => {
         </Wrapper>
       </SongInfo>
       <Player />
-      <PlayerConfig>Player Config</PlayerConfig>
+      <PlayerConfig />
     </Container>
   );
 };

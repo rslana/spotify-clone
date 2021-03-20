@@ -9,6 +9,7 @@ import {
   PlaybackTime,
   ProgressBarTrack,
   ProgressBarRange,
+  ProgressBarBullet,
 } from "./styles";
 import * as SvgIcons from "../Icons";
 import { usePlayer } from "../../contexts/player";
@@ -66,6 +67,7 @@ export default function Player() {
       audioElement.currentTime = (audioElement.duration * e.target.value) / 100;
     }
   }
+
   return (
     <Container>
       <PlayerControls>
@@ -89,6 +91,9 @@ export default function Player() {
         <PlaybackTime>{getAudioTime(currentTime)}</PlaybackTime>
         <ProgressBar>
           <ProgressBarTrack progress={getAudioProgess()} />
+          <ProgressBarBullet
+            style={{ left: `calc(-4px + ${getAudioProgess()}%)` }}
+          />
           <ProgressBarRange
             type="range"
             min="0"
