@@ -50,7 +50,31 @@ export const Card = styled.div`
     button {
       bottom: 8px;
       opacity: 1;
-      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+`;
+
+export const CustomCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+  padding: 24px;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  grid-column: auto / span 2;
+  background: linear-gradient(
+    149.46deg,
+    rgb(69, 10, 245),
+    rgb(142, 142, 229) 99.16%
+  );
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    button {
+      bottom: 16px;
+      opacity: 1;
     }
   }
 `;
@@ -77,18 +101,21 @@ export const Cover = styled.div.attrs((props: CoverProps) => ({
   position: relative;
 `;
 
-type CoverPlayButtonProps = {
+type PlayButtonProps = {
   active?: boolean;
+  size?: string;
 };
 
-export const CoverPlayButton = styled.button.attrs(
-  (props: CoverPlayButtonProps) => ({
-    active: props.active,
-  })
-)<CoverPlayButtonProps>`
-  width: 40px;
-  height: 40px;
-  transition: 300ms;
+export const PlayButton = styled.button.attrs((props: PlayButtonProps) => ({
+  active: props.active,
+  size: props.size === "big" ? "48px" : "40px",
+  transition: props.size === "big" ? "400ms" : "300ms",
+  padding: props.size === "big" ? "16px" : "8px",
+  iconSize: props.size === "big" ? "24px" : "16px",
+}))<PlayButtonProps>`
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
+  transition: ${(props) => props.transition};
   background-color: var(--green-color);
   border: none;
   border-radius: 50%;
@@ -97,10 +124,15 @@ export const CoverPlayButton = styled.button.attrs(
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 8px;
-  bottom: ${(props) => (props.active ? "8px" : "-20px")};
+  right: ${(props) => props.padding};
+  bottom: ${(props) => (props.active ? props.padding : `-${props.size}`)};
   opacity: ${(props) => (props.active ? "1" : "0")};
   outline: none;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+  svg {
+    width: ${(props) => props.iconSize};
+    height: ${(props) => props.iconSize};
+  }
 
   &:hover {
     transition: all 0ms;
@@ -130,5 +162,71 @@ export const CoverDescription = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--gray-text-color);
+`;
+
+export const CardTitle = styled.h1`
+  font-size: 24pt;
+  font-weight: 700;
+  line-height: 28pt;
+  letter-spacing: -0.04em;
+
+  margin: 16px 0 8px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
+export const CardDescription = styled.div`
+  white-space: normal;
+  font-size: 11pt;
+  font-weight: 400;
+  line-height: 13pt;
+  margin-top: 4px;
+  letter-spacing: normal;
+  text-transform: none;
+`;
+
+export const CardFooter = styled.div`
+  width: 100%;
+  justify-self: flex-end;
+`;
+
+export const LastSongsAdded = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+
+  span {
+    font-size: 12pt;
+    line-height: 18pt;
+  }
+
+  span:not(:first-child) {
+    span:first-child {
+      padding: 0 4px;
+      font-size: 11pt;
+      color: var(--gray-text-color);
+    }
+  }
+
+  div {
+    height: 72px;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+`;
+
+export const SongName = styled.span`
+  color: #fff;
+`;
+
+export const ArtistName = styled.span`
   color: var(--gray-text-color);
 `;

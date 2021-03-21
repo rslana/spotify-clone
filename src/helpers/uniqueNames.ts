@@ -67,7 +67,7 @@ export const searchKeywords = [
   "volcano",
   "nature",
   "river",
-  "galaxy",
+  "galaxy,universe",
   "waterfall",
   "thunderstorm",
   "minimalist",
@@ -78,6 +78,16 @@ export const searchKeywords = [
   "tree,nature",
   "green",
   "fish",
+  "moutain,ice",
+  "leaf",
+];
+
+export const songsKeywords = [
+  "universe,galaxy",
+  "landscape",
+  "waterfall",
+  "thunderstorm",
+  "tree,nature",
   "moutain,ice",
   "leaf",
 ];
