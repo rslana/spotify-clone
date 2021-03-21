@@ -56,16 +56,16 @@ const songs: Song[] = [
     _id: "id-3",
     name: "Fly me to the moon (Cover)",
     artist: getRandomName(),
-    cover: `https://source.unsplash.com/232x232/?${searchKeywords[2]}`,
+    cover: `https://source.unsplash.com/232x232/?${searchKeywords[3]}`,
     url: "/songs/frank_sinatra_fly_me_to_the_moon_cover_nursena_yener.mp3",
     liked: true,
   },
 ];
 
-export const findSongById = (_id: string) => {
-  return songs.find((song) => song?._id === _id);
+export const findSongs = (): Song[] => {
+  return songs;
 };
 
-export const findSongs = () => {
-  return songs;
+export const findSongById = (_id: string) => {
+  return songs.find((song) => song?._id === _id);
 };

@@ -6,7 +6,7 @@ import {
   // getRandomLength,
 } from "../helpers/uniqueNames";
 import { findSongs, Song } from "./songs";
-import { getLinkedListSize } from "./classes/LinkedList";
+import { getLinkedList, ListItem } from "./classes/LinkedList";
 
 export type Playlist = {
   _id: string;
@@ -16,34 +16,12 @@ export type Playlist = {
   cover: string;
   liked: boolean;
   songs: Song[];
-  songsLinkedList?: Song | null;
+  songsLinkedList?: ListItem | null;
   songsAmount?: number;
+  main?: boolean;
 };
 
 const songsArray = findSongs();
-
-// Creates a Double linked list
-const songsLinkedList: Song[] = songsArray.map((song, index) => {
-  // FIRST
-  if (index === 0 && index !== songsArray.length - 1) {
-    song.next = songsArray[index + 1];
-    song.previous = null;
-    return song;
-  }
-  // MIDDLE
-  if (index > 0 && index < songsArray.length - 1) {
-    song.next = songsArray[index + 1];
-    song.previous = songsArray[index - 1];
-    return song;
-  }
-  // LAST
-  if (index === songsArray.length - 1 && index !== 0) {
-    song.next = null;
-    song.previous = songsArray[index - 1];
-    return song;
-  }
-  return song;
-});
 
 const playlists: Playlist[] = searchKeywords.map((p, index) => ({
   _id: `id-${index}`,
@@ -52,8 +30,9 @@ const playlists: Playlist[] = searchKeywords.map((p, index) => ({
   author: getRandomName(),
   cover: `https://source.unsplash.com/232x232/?${searchKeywords[index]}`,
   liked: true,
-  songs: songsLinkedList,
-  songsLinkedList: songsLinkedList[0],
+  songs: songsArray,
+  // Creates a Double linked list (static for all playlists)
+  songsLinkedList: getLinkedList(songsArray)[0],
 }));
 
 // Empty playlist
@@ -84,9 +63,30 @@ export const findMainPlaylist = () => {
     author: getRandomName(),
     cover: `/images/covers/playlists/liked-songs.png`,
     liked: true,
-    songs: songsLinkedList,
-    songsLinkedList: songsLinkedList[0],
-    songsAmount: getLinkedListSize(songsLinkedList[0]),
+    songs: songsArray.filter((s, i) => i % 2 === 0),
+    // Creates a Double linked list (main playlist)
+    songsLinkedList: getLinkedList(songsArray.filter((s, i) => i % 2 === 0))[0],
+    songsAmount: songsArray.filter((s, i) => i % 2 === 0).length,
+    main: true,
   };
   return likedSongs;
+};
+
+playlists.unshift(findMainPlaylist());
+
+export const likeSong = (song: Song, playlist: Playlist) => {
+  if (playlist.songs.find((s) => s._id === song._id)) {
+    playlist.songs = playlist.songs.filter((s) => s._id !== song._id);
+  } else {
+    playlist.songs = [song, ...playlist.songs];
+  }
+  const linkedList = getLinkedList(playlist.songs);
+
+  playlist.songsLinkedList = linkedList[0];
+  playlist.songsAmount = playlist.songs.length;
+
+  return {
+    playlist,
+    song,
+  };
 };

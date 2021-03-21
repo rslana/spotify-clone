@@ -74,17 +74,19 @@ export default function VerticalMenu() {
         <PlaylistList shrink={!userConfig.showAlbum}>
           {myPlaylists.map((playlist) => {
             return (
-              <MenuLink
-                active={
-                  isActive(`/playlist/${playlist._id}`) ||
-                  song.playlist?._id === playlist._id
-                }
-                size="small"
-                key={playlist._id}
-                onDoubleClick={() => playSong({ playlist })}
-              >
-                <Link to={`/playlist/${playlist._id}`}>{playlist.name}</Link>
-              </MenuLink>
+              !playlist.main && (
+                <MenuLink
+                  active={
+                    isActive(`/playlist/${playlist._id}`) ||
+                    song.playlist?._id === playlist._id
+                  }
+                  size="small"
+                  key={playlist._id}
+                  onDoubleClick={() => playSong({ playlist })}
+                >
+                  <Link to={`/playlist/${playlist._id}`}>{playlist.name}</Link>
+                </MenuLink>
+              )
             );
           })}
         </PlaylistList>

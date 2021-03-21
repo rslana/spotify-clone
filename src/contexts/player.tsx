@@ -1,13 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Album } from "../api/albums";
-import { findMyPlaylists, findPlaylistById, Playlist } from "../api/playlists";
-import { findSongById, Song, initSongState } from "../api/songs";
+import { Playlist } from "../api/playlists";
+import * as playlistService from "../api/playlists";
+import { Song, initSongState } from "../api/songs";
+
 import {
   getLocalUserConfig,
   setLocalUserConfig,
   UserConfig,
   initUserConfigState,
 } from "../helpers/storage";
+import { getLinkedList, ListItem } from "../api/classes/LinkedList";
 
 type PlaySongProps = {
   playlist?: Playlist;
@@ -23,6 +26,9 @@ export interface PlayerContextType {
   setUserConfig(userConfig: UserConfig): void;
   song: Song;
   setSong<Song>(song: Song): void;
+  listItem: ListItem;
+  setListItem<ListItem>(listItem: ListItem | null | undefined): void;
+  likeSong<Song>(song: Song): void;
   myPlaylists: Playlist[];
   setMyPlaylists(playlists: Playlist[]): void;
   audioElement: HTMLAudioElement | null;
@@ -43,6 +49,7 @@ export default function PlayerContextProvider(
   const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
   const [playlist, setPlaylist] = useState<Playlist>();
   const [song, setSong] = useState<Song>(initSongState);
+  const [listItem, setListItem] = useState<ListItem | null | undefined>(null);
   const [audioElement, setAudioElement] = useState<HTMLAudioElement>(
     new Audio()
   );
@@ -52,11 +59,13 @@ export default function PlayerContextProvider(
 
   useEffect(() => {
     setUserConfig(getLocalUserConfig());
-    setMyPlaylists(findMyPlaylists());
-    const songFound = findSongById("id-0");
-    const playlistFound = findPlaylistById("id-0");
-    if (songFound) {
-      setSong({ ...songFound, playlist: playlistFound });
+    setMyPlaylists(playlistService.findMyPlaylists());
+    const playlistFound = playlistService.findPlaylistById("id-0");
+    if (playlistFound) {
+      playlistFound.songsLinkedList = getLinkedList(playlistFound.songs)[0];
+      const songFound = playlistFound.songsLinkedList;
+      setSong({ ...songFound.song, playlist: playlistFound });
+      setListItem(songFound);
     }
   }, []);
 
@@ -88,14 +97,16 @@ export default function PlayerContextProvider(
 
   const playSong = (props?: PlaySongProps) => {
     if (props?.playlist?._id) {
+      props.playlist.songsLinkedList = getLinkedList(props.playlist.songs)[0];
       const songFound = props.playlist.songsLinkedList;
+      setListItem(songFound);
 
       const isSamePlaylist = () => {
         return song?.playlist?._id === props.playlist?._id;
       };
 
       const isSameSong = () => {
-        return songFound?._id === song?._id;
+        return songFound?.song._id === song?._id;
       };
 
       if (songFound) {
@@ -109,7 +120,7 @@ export default function PlayerContextProvider(
         } else {
           console.log("NEW SONG");
           newSong({
-            ...songFound,
+            ...songFound.song,
             playlist: props.playlist,
           });
         }
@@ -126,27 +137,48 @@ export default function PlayerContextProvider(
   };
 
   const playNextSong = () => {
-    if (song.next) {
+    if (listItem?.next) {
+      setListItem(listItem.next);
       newSong({
-        ...song.next,
-        playlist: song.next.playlist ? song.next.playlist : song.playlist,
+        ...listItem.next.song,
+        playlist: listItem.next?.song.playlist
+          ? listItem?.next.song.playlist
+          : song.playlist,
       });
     } else {
+      setListItem(listItem);
       newSong(song, false);
     }
   };
 
   const playPreviousSong = () => {
-    if (song.previous && audioElement.currentTime <= 2) {
+    if (listItem?.previous && audioElement.currentTime <= 2) {
+      setListItem(listItem.previous);
       newSong({
-        ...song.previous,
-        playlist: song.previous.playlist
-          ? song.previous.playlist
+        ...listItem.previous.song,
+        playlist: listItem.previous?.song.playlist
+          ? listItem.previous.song.playlist
           : song.playlist,
       });
     } else {
+      setListItem(listItem);
       newSong(song, true);
     }
+  };
+
+  const likeSong = (song: Song) => {
+    const mainPlaylist = myPlaylists.find((p) => p.main);
+    const res = playlistService.likeSong(song, mainPlaylist!);
+
+    const newPlaylist = res.playlist;
+    newPlaylist.songsLinkedList = getLinkedList(newPlaylist.songs)[0];
+
+    setMyPlaylists(
+      myPlaylists.map((p) => {
+        return p._id === newPlaylist._id ? newPlaylist : p;
+      })
+    );
+    setSong(res.song);
   };
 
   const contextValue = {
@@ -155,6 +187,7 @@ export default function PlayerContextProvider(
     setMyPlaylists,
     song,
     setSong,
+    likeSong,
     userConfig,
     setUserConfig,
     audioElement,

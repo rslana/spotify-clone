@@ -57,7 +57,7 @@ export default function Player() {
   }
 
   function getAudioProgess() {
-    return audioElement && currentTime
+    return audioElement?.duration && currentTime
       ? (Number(currentTime) * 100) / Number(audioElement.duration)
       : 0;
   }

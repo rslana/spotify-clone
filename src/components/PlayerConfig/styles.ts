@@ -19,11 +19,6 @@ export const VolumeBar = styled.div`
   height: 16px;
 `;
 
-export const PlaybackTime = styled.div`
-  font-size: 10pt;
-  letter-spacing: -0.04rem;
-`;
-
 export const ProgressBar = styled.div`
   position: relative;
   width: 100%;

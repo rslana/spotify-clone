@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import "./styles/globals.css";
 import Layout from "./components/Layout";
 
 import Home from "./pages";
